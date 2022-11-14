@@ -32,13 +32,11 @@ const Market = (props: MarketProps) => {
     const [titleWidth, setTitleWidth] = React.useState<number>();
     React.useEffect(() => {
         if (divRef.current) {
-            setTitleWidth(divRef.current?.clientWidth - 20/*padding-right*/);
-            window.requestAnimationFrame(() => {
-                if (divRef.current) {
-                    const y = (divRef.current.scrollHeight - divRef.current.clientHeight) / 2;
-                    divRef.current?.scrollTo(0, y);
-                }
-            });
+            setTitleWidth(divRef.current.clientWidth - 20/*padding-right*/);
+            if (divRef.current) {
+                const y = (divRef.current.scrollHeight - divRef.current.clientHeight) / 2;
+                divRef.current.scrollTo(0, y);
+            }
         }
     }, [setTitleWidth, props]);
 
