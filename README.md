@@ -1,7 +1,8 @@
 # near-test
 
-Example of a client application for the NEAR blockchain
-It is available for playing by url
+This is an example of a client application for the NEAR blockchain.
+
+It is available for playing by url https://near-test-fcn7f4ebeq-uc.a.run.app/
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
