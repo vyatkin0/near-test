@@ -21,10 +21,10 @@ function formatNum(n: number, scale?: number) {
     return scaleNum(n).toFixed(scale);
 }
 
-const row = (order: Order, cn: string, key: number) => <div className={classes.row + ' ' + cn} key={key}>
-    <span>{formatNum(order.price, 4)}</span>
-    <span>{formatNum(order.quantity, 4)}</span>
-    <span>{(scaleNum(order.price) * scaleNum(order.quantity)).toFixed(2)}</span>
+const row = (order: Order, cn: string, key: number) => <div className={classes.row + ' ' + cn} key={key} role='row'>
+    <span role='cell'>{formatNum(order.price, 4)}</span>
+    <span role='cell'>{formatNum(order.quantity, 4)}</span>
+    <span role='cell'>{(scaleNum(order.price) * scaleNum(order.quantity)).toFixed(2)}</span>
 </div>;
 
 const Market = (props: MarketProps) => {
@@ -43,21 +43,21 @@ const Market = (props: MarketProps) => {
     const spread = props.ask_orders[props.ask_orders.length - 1]?.price - props.bid_orders[0]?.price;
     const pspread = spread / props.bid_orders[0]?.price * 100;
 
-    return <>
-        <div className={classes.row + ' ' + classes.title} style={{ width: titleWidth }}>
-            <span>Price</span><span>Size</span><span>Total</span>
+    return <div role='table'>
+        <div className={classes.row + ' ' + classes.title} style={{ width: titleWidth }} role='rowheader'>
+            <span role='cell'>Price</span><span role='cell'>Size</span><span role='cell'>Total</span>
         </div>
-        <div className={classes.container} ref={divRef}>
+        <div className={classes.container} ref={divRef} role='rowgroup'>
             {props.ask_orders.map((order, i) => row(order, classes.ask, i))}
             {!!props.bid_orders.length && !!props.ask_orders.length &&
-                <div className={classes.row + ' ' + classes.spread}>
-                    <span>{formatNum(spread, 4)}</span>
-                    <span>Spread</span>
-                    <span>{pspread.toFixed(2)}%</span>
+                <div className={classes.row + ' ' + classes.spread} role='rowheader'>
+                    <span role='cell'>{formatNum(spread, 4)}</span>
+                    <span role='cell'>Spread</span>
+                    <span role='cell'>{pspread.toFixed(2)}%</span>
                 </div>}
             {props.bid_orders.map((order, i) => row(order, classes.bid, i))}
         </div>
-    </>
+    </div>
 }
 
 export default Market;

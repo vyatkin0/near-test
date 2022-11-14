@@ -64,6 +64,7 @@
 .opener {
     display: flex;
     align-items: center;
+    justify-content: center;
     height: 100%;
     width: 20px;
     color: var(--color-shared-secondary);

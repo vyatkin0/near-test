@@ -48,14 +48,15 @@ const SelectMarket = (props: SelectMarketProps) => {
     }, [handleOutsideClick]);
 
     const dropdownList = React.useMemo(() =>
-        <div className={classes.dropdown}>
+        <div className={classes.dropdown} id='markets-list' role='listbox' aria-label='Markets'>
             {props.markets.map((m) => {
-                return <button key={m.id} className={classes.item}
-                    onClick={() => handleSelect(m.id)}
+                const selected = m.id===selectedMarket;
+                return <button key={m.id} role='option' aria-selected={selected}
+                    className={classes.item} onClick={() => handleSelect(m.id)}
                 >
                     {m.base.ticker}/{m.quote.ticker}
                 </button>
-            })}</div>, [props.markets, handleSelect]);
+            })}</div>, [props.markets, selectedMarket, handleSelect]);
 
     function handleDown() {
         setOpened(true);
@@ -85,9 +86,13 @@ const SelectMarket = (props: SelectMarketProps) => {
             className={contentClass}
             tabIndex={0}
             onKeyDown={onKeyDown}
+            role='combobox'
+            aria-labelledby='markets-label'
+            aria-controls='markets-list'
+            aria-expanded={isOpened}
         >
-            {market ? <span>{market.base.ticker + '/' + market.quote.ticker}</span> : <span className={classes.title}>Select Market</span>}
-            <span className={classes.opener} onClick={openerClick}>
+            {market ? <span>{market.base.ticker + '/' + market.quote.ticker}</span> : <span className={classes.title} id='markets-label'>Select Market</span>}
+            <span className={classes.opener} onClick={openerClick} aria-haspopup='listbox' aria-controls='markets-list'>
                 <svg width='10' height='6' xmlns='http://www.w3.org/2000/svg'><path d={openerPath} fill='currentColor'></path></svg>
             </span>
         </div>
