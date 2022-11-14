@@ -3,7 +3,7 @@ import * as nearAPI from 'near-api-js';
 import SelectMarket, { MarketInfo } from './components/SelectMarket';
 import MarketTable, { MarketProps } from './components/Market';
 
-import './App.css';
+import classes from './App.module.css';
 
 type MarketContract = nearAPI.Contract & { markets: Function, view_market: Function };
 
@@ -99,19 +99,19 @@ export default function App() {
     }, [contract, setMarket]);
 
     if (!account) {
-        return <main>
+        return <div className={classes.main}>
             <button onClick={onSignIn}>SignIn</button>
-        </main>;
+        </div>;
     }
 
     return (
-        <main>
+        <div className={classes.main}>
             <h2>wallet: {account.accountId}</h2>
             <h3>total: {balance}</h3>
             <button onClick={onContract} disabled={!contract}>Call Contract</button>
             {marketsList && <SelectMarket markets={marketsList} onChanged={onMarketChanged}></SelectMarket>}
             {market && <MarketTable {...market}></MarketTable>}
             <button onClick={onSignOut}>SignOut</button>
-        </main>
+        </div>
     );
 }

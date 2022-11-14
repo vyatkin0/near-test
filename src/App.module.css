@@ -27,10 +27,14 @@ button:disabled {
     background-color: var(--color-background-surface2);
 }
 
-main {
+div.main {
     width: 500px;
     margin: 50px auto;
     display: flex;
     flex-direction: column;
     row-gap: 10px;
+}
+
+div.main > button {
+    align-self: center;
 }

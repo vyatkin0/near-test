@@ -1,6 +1,7 @@
 .main {
     position: relative;
     width: 200px;
+    align-self: center;
 }
 
 .content {
