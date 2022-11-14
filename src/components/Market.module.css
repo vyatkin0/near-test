@@ -1,0 +1,36 @@
+.container {
+    height: 300px;
+    padding-right: 20px;
+    overflow-y: auto;
+}
+
+.row {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.row span{
+    width: 33%;
+    text-align: right;
+}
+
+.row span:first-child{
+    text-align: unset;
+}
+
+.bid {
+    color: var(--color-bid);
+}
+
+.ask {
+    color: var(--color-ask);
+}
+
+.spread {
+    color: var(--color-shared-secondary);
+}
+
+.title {
+    color: var(--color-shared-tertiary);
+}

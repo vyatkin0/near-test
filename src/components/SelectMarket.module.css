@@ -1,0 +1,70 @@
+.main {
+    position: relative;
+    width: 200px;
+}
+
+.content {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    outline: none;
+    background-color: var(--color-background-surface2);
+    color: var(--color-shared-primary);
+}
+
+.contentFocused, .content:focus {
+    padding: 4px;
+    border: 2px solid var(--color-shared-secondary);
+}
+
+.content:hover:not(:focus) {
+    border-color: var(--color-shared-tertiary);
+}
+
+.title {
+    color: var(--color-shared-tertiary);
+}
+
+.dropdown {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 54px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    background-color: var(--color-background-surface1);
+    border-radius: 8px;
+    z-index: 1;
+}
+
+.item {
+    display: block;
+    border: none;
+    text-align: left;
+    color: var(--color-shared-primary);
+    background: var(--color-background-surface1);
+    height: 40px;
+    border-radius: 5px;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.item:hover {
+    background: var(--color-background-surface2) !important;
+}
+
+.opener {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 20px;
+    color: var(--color-shared-secondary);
+    cursor: pointer;
+}
