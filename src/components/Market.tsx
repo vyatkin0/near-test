@@ -42,12 +42,10 @@ const Market = (props: MarketProps) => {
     React.useEffect(() => {
         if (divRef.current) {
             setTitleWidth(divRef.current.clientWidth - 20/*padding-right*/);
-            if (divRef.current) {
-                const y = (divRef.current.scrollHeight - divRef.current.clientHeight) / 2;
-                divRef.current.scrollTo(0, y);
-            }
+            const y = (divRef.current.scrollHeight - divRef.current.clientHeight) / 2;
+            divRef.current.scrollTo(0, y);
         }
-    }, [setTitleWidth, props]);
+    }, [props]);
 
     const spread = props.ask_orders[props.ask_orders.length - 1]?.price - props.bid_orders[0]?.price;
     const pspread = spread / props.bid_orders[0]?.price * 100;
