@@ -14,9 +14,11 @@ interface SelectMarketProps {
 }
 
 const SelectMarket = (props: SelectMarketProps) => {
+    const {selected, markets, onChanged} = props; 
+
     const [isOpened, setOpened] = React.useState(false);
 
-    const [selectedMarket, setSelectedMarket] = React.useState<number | undefined>(props.selected);
+    const [selectedMarket, setSelectedMarket] = React.useState<number | undefined>(selected);
 
     const mainDivRef = React.useRef<HTMLDivElement>(null);
 
@@ -34,7 +36,6 @@ const SelectMarket = (props: SelectMarketProps) => {
         setOpened(false);
     }, [setOpened, handleOutsideClick]);
 
-    const {onChanged} = props; 
     const handleSelect = React.useCallback((market: number) => {
         handleUp();
 
@@ -49,14 +50,14 @@ const SelectMarket = (props: SelectMarketProps) => {
 
     const dropdownList = React.useMemo(() =>
         <div className={classes.dropdown} id='markets-list' role='listbox' aria-label='Markets'>
-            {props.markets.map((m) => {
+            {markets.map((m) => {
                 const selected = m.id===selectedMarket;
                 return <button key={m.id} role='option' aria-selected={selected}
                     className={classes.item} onClick={() => handleSelect(m.id)}
                 >
                     {m.base.ticker}/{m.quote.ticker}
                 </button>
-            })}</div>, [props.markets, selectedMarket, handleSelect]);
+            })}</div>, [markets, selectedMarket, handleSelect]);
 
     function handleDown() {
         setOpened(true);
@@ -79,7 +80,7 @@ const SelectMarket = (props: SelectMarketProps) => {
     const openerPath = isOpened ? 'M10 6L5 0L0 6 H10Z' : 'M10 0L5 6L0 0H10Z';
     const openerClick = isOpened ? handleUp : handleDown;
     const contentClass = isOpened ? classes.content + ' ' + classes.contentFocused : classes.content;
-    const market = props.markets.find(m => m.id === selectedMarket);
+    const market = markets.find(m => m.id === selectedMarket);
 
     return <div className={classes.main} ref={mainDivRef}>
         <div

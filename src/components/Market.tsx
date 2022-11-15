@@ -47,7 +47,7 @@ const Market = (props: MarketProps) => {
                 divRef.current.scrollTo(0, y);
             }
         }
-    }, [setTitleWidth]);
+    }, [setTitleWidth, props]);
 
     const spread = props.ask_orders[props.ask_orders.length - 1]?.price - props.bid_orders[0]?.price;
     const pspread = spread / props.bid_orders[0]?.price * 100;
