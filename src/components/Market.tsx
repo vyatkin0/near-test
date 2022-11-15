@@ -3,6 +3,7 @@ import React from 'react';
 import { utils } from 'near-api-js';
 
 import classes from './Market.module.css';
+
 interface Order {
     price: number;
     quantity: number;
