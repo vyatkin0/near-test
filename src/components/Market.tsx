@@ -1,8 +1,8 @@
 
 import React from 'react';
-import classes from './Market.module.css';
 import { utils } from 'near-api-js';
 
+import classes from './Market.module.css';
 interface Order {
     price: number;
     quantity: number;
@@ -21,10 +21,18 @@ function formatNum(n: number, scale?: number) {
     return scaleNum(n).toFixed(scale);
 }
 
+function Cell({ children }: React.PropsWithChildren) {
+    return <span role='cell'>{children}</span>
+}
+
+function HeadCell({ children }: React.PropsWithChildren) {
+    return <span role='columnheader'>{children}</span>
+}
+
 const row = (order: Order, cn: string, key: number) => <div className={classes.row + ' ' + cn} key={key} role='row'>
-    <span role='cell'>{formatNum(order.price, 4)}</span>
-    <span role='cell'>{formatNum(order.quantity, 4)}</span>
-    <span role='cell'>{(scaleNum(order.price) * scaleNum(order.quantity)).toFixed(2)}</span>
+    <Cell>{formatNum(order.price, 4)}</Cell>
+    <Cell>{formatNum(order.quantity, 4)}</Cell>
+    <Cell>{(scaleNum(order.price) * scaleNum(order.quantity)).toFixed(2)}</Cell>
 </div>;
 
 const Market = (props: MarketProps) => {
@@ -45,15 +53,15 @@ const Market = (props: MarketProps) => {
 
     return <div role='table'>
         <div className={classes.row + ' ' + classes.title} style={{ width: titleWidth }} role='rowheader'>
-            <span role='cell'>Price</span><span role='cell'>Size</span><span role='cell'>Total</span>
+            <HeadCell>Price</HeadCell><HeadCell>Size</HeadCell><HeadCell>Total</HeadCell>
         </div>
         <div className={classes.container} ref={divRef} role='rowgroup'>
             {props.ask_orders.map((order, i) => row(order, classes.ask, i))}
             {!!props.bid_orders.length && !!props.ask_orders.length &&
                 <div className={classes.row + ' ' + classes.spread} role='rowheader'>
-                    <span role='cell'>{formatNum(spread, 4)}</span>
-                    <span role='cell'>Spread</span>
-                    <span role='cell'>{pspread.toFixed(2)}%</span>
+                    <Cell>{formatNum(spread, 4)}</Cell>
+                    <Cell>Spread</Cell>
+                    <Cell>{pspread.toFixed(2)}%</Cell>
                 </div>}
             {props.bid_orders.map((order, i) => row(order, classes.bid, i))}
         </div>
