@@ -57,7 +57,8 @@ const SelectMarket = (props: SelectMarketProps) => {
                 >
                     {m.base.ticker}/{m.quote.ticker}
                 </button>
-            })}</div>, [markets, selectedMarket, handleSelect]);
+            })}
+        </div>, [markets, selectedMarket, handleSelect]);
 
     function handleDown() {
         setOpened(true);
