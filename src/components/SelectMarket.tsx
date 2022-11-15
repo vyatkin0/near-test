@@ -14,7 +14,7 @@ interface SelectMarketProps {
 }
 
 const SelectMarket = (props: SelectMarketProps) => {
-    const {selected, markets, onChanged} = props; 
+    const { selected, markets, onChanged } = props;
 
     const [isOpened, setOpened] = React.useState(false);
 
@@ -51,7 +51,7 @@ const SelectMarket = (props: SelectMarketProps) => {
     const dropdownList = React.useMemo(() =>
         <div className={classes.dropdown} id='markets-list' role='listbox' aria-label='Markets'>
             {markets.map((m) => {
-                const selected = m.id===selectedMarket;
+                const selected = m.id === selectedMarket;
                 return <button key={m.id} role='option' aria-selected={selected}
                     className={classes.item} onClick={() => handleSelect(m.id)}
                 >
