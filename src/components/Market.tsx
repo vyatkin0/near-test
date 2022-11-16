@@ -40,7 +40,7 @@ const Market = (props: MarketProps) => {
     const divRef = React.useRef<HTMLDivElement | null>(null);
     const [titleWidth, setTitleWidth] = React.useState<number>();
 
-    const {ask_orders, bid_orders} = props;
+    const { ask_orders, bid_orders } = props;
 
     React.useEffect(() => {
         if (divRef.current) {
@@ -54,10 +54,10 @@ const Market = (props: MarketProps) => {
     const pspread = spread / bid_orders[0]?.price * 100;
 
     let top, bottom;
-    if(ask_orders.length > bid_orders.length) {
-        bottom = <div style={{height: (ask_orders.length-bid_orders.length)*25/*.row height*/}}></div>;
-    } else if(ask_orders.length < bid_orders.length) {
-        top = <div style={{height: (bid_orders.length-ask_orders.length)*25/*.row height*/}}></div>;
+    if (ask_orders.length > bid_orders.length) {
+        bottom = <div style={{ height: (ask_orders.length - bid_orders.length) * 25/*.row height*/ }}></div>;
+    } else if (ask_orders.length < bid_orders.length) {
+        top = <div style={{ height: (bid_orders.length - ask_orders.length) * 25/*.row height*/ }}></div>;
     }
 
     return <div role='table'>
