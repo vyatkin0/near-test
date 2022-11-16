@@ -40,22 +40,24 @@ const Market = (props: MarketProps) => {
     const divRef = React.useRef<HTMLDivElement | null>(null);
     const [titleWidth, setTitleWidth] = React.useState<number>();
 
+    const {ask_orders, bid_orders} = props;
+
     React.useEffect(() => {
         if (divRef.current) {
             setTitleWidth(divRef.current.clientWidth - 20/*padding-right*/);
             const y = (divRef.current.scrollHeight - divRef.current.clientHeight) / 2;
             divRef.current.scrollTo(0, y);
         }
-    }, [setTitleWidth, props.ask_orders, props.bid_orders]);
+    }, [setTitleWidth, ask_orders, bid_orders]);
 
-    const spread = props.ask_orders[props.ask_orders.length - 1]?.price - props.bid_orders[0]?.price;
-    const pspread = spread / props.bid_orders[0]?.price * 100;
+    const spread = ask_orders[ask_orders.length - 1]?.price - bid_orders[0]?.price;
+    const pspread = spread / bid_orders[0]?.price * 100;
 
     let top, bottom;
-    if(props.ask_orders.length > props.bid_orders.length) {
-        bottom = <div style={{height: (props.ask_orders.length-props.bid_orders.length)*25/*.row height*/}}></div>;
-    } else if(props.ask_orders.length < props.bid_orders.length) {
-        top = <div style={{height: (props.bid_orders.length-props.ask_orders.length)*25/*.row height*/}}></div>;
+    if(ask_orders.length > bid_orders.length) {
+        bottom = <div style={{height: (ask_orders.length-bid_orders.length)*25/*.row height*/}}></div>;
+    } else if(ask_orders.length < bid_orders.length) {
+        top = <div style={{height: (bid_orders.length-ask_orders.length)*25/*.row height*/}}></div>;
     }
 
     return <div role='table'>
@@ -64,14 +66,14 @@ const Market = (props: MarketProps) => {
         </div>
         <div className={classes.container} ref={divRef} role='rowgroup'>
             {top}
-            {props.ask_orders.map((order, i) => row(order, classes.ask, i))}
-            {!!props.bid_orders.length && !!props.ask_orders.length &&
+            {ask_orders.map((order, i) => row(order, classes.ask, i))}
+            {!!bid_orders.length && !!ask_orders.length &&
                 <div className={classes.row + ' ' + classes.spread} role='rowheader'>
                     <Cell>{formatNum(spread, 4)}</Cell>
                     <Cell>Spread</Cell>
                     <Cell>{pspread.toFixed(2)}%</Cell>
                 </div>}
-            {props.bid_orders.map((order, i) => row(order, classes.bid, i))}
+            {bid_orders.map((order, i) => row(order, classes.bid, i))}
             {bottom}
         </div>
     </div>
